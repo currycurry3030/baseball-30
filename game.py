@@ -4,9 +4,11 @@ from game_result import GameResult
 class Game:
     def __init__(self) -> None:
         self.question = ""
+
     def guess(self, guessNumber):
         self.assert_illegal_value(guessNumber)
-        return GameResult(True, 3, 0)
+        if guessNumber == self.question:
+            return GameResult(True, 3, 0)
 
     def assert_illegal_value(self, guessNumber):
         if guessNumber is None:
