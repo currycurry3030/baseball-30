@@ -2,6 +2,7 @@ from unittest import TestCase
 from game import Game
 from game_result import GameResult
 
+
 class TestGame(TestCase):
     def setUp(self):
         self.game = Game()
@@ -28,4 +29,13 @@ class TestGame(TestCase):
         self.assertIsNotNone(result)
         self.assertTrue(result.get_solved())
         self.assertEqual(3, result.get_strikes())
+        self.assertEqual(0, result.get_balls())
+
+    def test_return_solve_result_if_unmatched_number(self):
+        self.game.question = "123"
+        result: GameResult = self.game.guess("456")
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.get_solved())
+        self.assertEqual(0, result.get_strikes())
         self.assertEqual(0, result.get_balls())
